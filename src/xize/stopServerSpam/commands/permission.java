@@ -23,6 +23,10 @@ public class permission {
 					sender.sendMessage(ChatColor.RED + "you don't have permission for /" + cmd.getName() + args[0] + "\n" + ChatColor.GRAY + "permission: stopserverspam.command.config");
 				} else if(args[0].equalsIgnoreCase("enable")) {
 					sender.sendMessage(ChatColor.RED + "you don't have permission for /" + cmd.getName() + args[0] + "\n" + ChatColor.GRAY + "permission: stopserverspam.command.enable");
+				} else if(args[0].equalsIgnoreCase("disable")) {
+					sender.sendMessage(ChatColor.RED + "you don't have permission for /" + cmd.getName() + args[0] + "\n" + ChatColor.GRAY + "permission: stopserverspam.command.disable");
+				} else if(args[0].equalsIgnoreCase("help")) {
+					sender.sendMessage(ChatColor.RED + "you don't have permission for /" + cmd.getName() + args[0] + "\n" + ChatColor.GRAY + "permission: stopserverspam.command");
 				}
 			}
 		}

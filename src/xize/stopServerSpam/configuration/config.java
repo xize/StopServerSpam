@@ -18,9 +18,9 @@ public class config {
 	public config(StopServerSpam plugin) {
 		this.plugin = plugin;
 	}
-	
+
 	Logger log = Logger.getLogger("Minecraft");
-	
+
 	public void createConfig() {
 		try {
 			File f = new File(plugin.getDataFolder() + File.separator + "config.yml");
@@ -43,16 +43,16 @@ public class config {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public boolean checkConfig(File f) throws IOException {
 		FileConfiguration con = YamlConfiguration.loadConfiguration(f);
 		String[] list = {
-			"disable-plugin",
-			"consoleWarnings.EndOfStream",
-			"consoleWarnings.LostConnection",
-			"consoleWarnings.GenericReason",
-			"consoleWarnings.TimeOut",
-			"consoleWarnings.disconnectQuiting"
+				"disable-plugin",
+				"consoleWarnings.EndOfStream",
+				"consoleWarnings.LostConnection",
+				"consoleWarnings.GenericReason",
+				"consoleWarnings.TimeOut",
+				"consoleWarnings.disconnectQuiting"
 		};
 		for(int i = 0; i < list.length; i++) {
 			if(!con.isSet(list[i])) {
@@ -63,15 +63,15 @@ public class config {
 		}
 		return false;
 	}
-	
+
 	public void reload() {
 		createConfig();
 		HandlerList.unregisterAll(plugin);
 		handler Handler = new handler(plugin);
 		Handler.activateListener();
-		
+
 	}
-	
+
 	public void showConfigVars(CommandSender sender) {
 		try {
 			File f = new File(plugin.getDataFolder() + File.separator + "config.yml");
@@ -83,7 +83,7 @@ public class config {
 					} else {
 						sender.sendMessage(ChatColor.GRAY + "disable-plugin:" + ChatColor.RED + "true (plugin does nothing)");
 					}
-					
+
 				}
 				if(con.isSet("consoleWarnings.EndOfStream")) {
 					if(con.isBoolean("consoleWarnings.EndOfStream")) {
@@ -91,7 +91,7 @@ public class config {
 					} else {
 						sender.sendMessage(ChatColor.GRAY + "consoleWarnings.EndOfStream:" + ChatColor.RED + "false");
 					}
-					
+
 				}
 				if(con.isSet("consoleWarnings.LostConnection")) {
 					if(con.isBoolean("consoleWarnings.LostConnection")) {
@@ -99,7 +99,7 @@ public class config {
 					} else {
 						sender.sendMessage(ChatColor.GRAY + "consoleWarnings.LostConnection:" + ChatColor.RED + " false");
 					}
-					
+
 				}
 				if(con.isSet("consoleWarnings.GenericReason")) {
 					if(con.isBoolean("consoleWarnings.GenericReason")) {
@@ -107,7 +107,7 @@ public class config {
 					} else {
 						sender.sendMessage(ChatColor.GRAY + "consoleWarnings.GenericReason:" + ChatColor.RED + " false");
 					}
-					
+
 				}
 				if(con.isSet("consoleWarnings.TimeOut")) {
 					if(con.isBoolean("consoleWarnings.TimeOut")) {
@@ -115,7 +115,7 @@ public class config {
 					} else {
 						sender.sendMessage(ChatColor.GRAY + "consoleWarnings.TimeOut:" + ChatColor.RED + "false");
 					}
-					
+
 				}
 				if(con.isSet("consoleWarnings.disconnectQuiting")) {
 					if(con.isBoolean("consoleWarnings.disconnectQuiting")) {
@@ -123,7 +123,7 @@ public class config {
 					} else {
 						sender.sendMessage(ChatColor.GRAY + "consoleWarnings.disconnectQuiting:" + ChatColor.RED + "false");
 					}
-					
+
 				}
 			} else {
 				sender.sendMessage(ChatColor.RED + "warning config.yml whas not found, retry this command if you want to see a new list");
@@ -132,6 +132,63 @@ public class config {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public boolean isEnabled() {
+		try {
+			File f = new File(plugin.getDataFolder() + File.separator + "config.yml");
+			FileConfiguration con = YamlConfiguration.loadConfiguration(f);
+			if(!con.getBoolean("disable-plugin")) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public boolean setEnabled() {
+		try {
+			if(isEnabled()) {
+				try {
+					File f = new File(plugin.getDataFolder() + File.separator + "config.yml");
+					FileConfiguration con = YamlConfiguration.loadConfiguration(f);
+					con.set("disable-plugin", false);
+					con.save(f);
+					reload();
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+			} else {
+
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public boolean setDisabled() {
+		try {
+			if(!isEnabled()) {
+				try {
+					File f = new File(plugin.getDataFolder() + File.separator + "config.yml");
+					FileConfiguration con = YamlConfiguration.loadConfiguration(f);
+					con.set("disable-plugin", true);
+					con.save(f);
+					reload();
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+			} else {
+
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 }
