@@ -1,0 +1,29 @@
+name: StopServerSpam
+version: 1.0
+description: stop the server spam from consoles
+author: xize
+authors: [] 
+website:
+
+main: xize.stopServerSpam.StopServerSpam
+database: false
+depend: []
+softdepend: []
+
+commands:
+  stopserverspam:
+    description: global configuration stopserverspam
+    aliases: [sss]
+    permission:
+    permission-message:
+
+permissions:
+  stopserverspam.*:
+    description: Gives access to all plugin commands
+    children:
+      stopserverspam.command: true
+      stopserverspam.command.reload: true
+      stopserverspam.command.config: true
+      stopserverspam.command.enable: true
+      stopserverspam.command.disable: true
+      stopserverspam.command.config.changeable: true
