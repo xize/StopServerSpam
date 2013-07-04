@@ -37,13 +37,21 @@ public class command {
 						}
 					} else if(args[0].equalsIgnoreCase("config")) {
 						if(sender.hasPermission("stopserverspam.command.config")) {
-							
+							config cfg = new config(plugin);
+							sender.sendMessage(ChatColor.GOLD + ".oO___[configurable options]___Oo.");
+							sender.sendMessage("these are the variable key sets which you can use with /sss config enable <dotSyntax>");
+							cfg.showConfigVars(sender);
 						} else {
 							permission perm = new permission(plugin);
 							perm.getPermissionError(sender, cmd, args);
 						}
 					} else if(args[0].equalsIgnoreCase("enable")) {
-						
+						if(sender.hasPermission("stopserverspam.command.enable")) {
+							
+						} else {
+							permission perm = new permission(plugin);
+							perm.getPermissionError(sender, cmd, args);
+						}
 					} else if(args[0].equalsIgnoreCase("disable")) {
 						
 					} else if(args[0].equalsIgnoreCase("help")) {

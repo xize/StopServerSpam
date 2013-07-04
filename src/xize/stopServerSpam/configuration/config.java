@@ -79,49 +79,49 @@ public class config {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
 				if(con.isSet("disable-plugin")) {
 					if(!con.isBoolean("disable-plugin")) {
-						sender.sendMessage("disable-plugin: false");
+						sender.sendMessage(ChatColor.GRAY + "disable-plugin:" + ChatColor.GREEN + "false (plugin filtering is enabled)");
 					} else {
-						sender.sendMessage("disable-plugin: true");
+						sender.sendMessage(ChatColor.GRAY + "disable-plugin:" + ChatColor.RED + "true (plugin does nothing)");
 					}
 					
 				}
 				if(con.isSet("consoleWarnings.EndOfStream")) {
 					if(con.isBoolean("consoleWarnings.EndOfStream")) {
-						sender.sendMessage("consoleWarnings.EndOfStream: true");
+						sender.sendMessage(ChatColor.GRAY + "consoleWarnings.EndOfStream:" + ChatColor.GREEN + "true");
 					} else {
-						sender.sendMessage("consoleWarnings.EndOfStream: false");
+						sender.sendMessage(ChatColor.GRAY + "consoleWarnings.EndOfStream:" + ChatColor.RED + "false");
 					}
 					
 				}
 				if(con.isSet("consoleWarnings.LostConnection")) {
 					if(con.isBoolean("consoleWarnings.LostConnection")) {
-						sender.sendMessage("consoleWarnings.LostConnection: true");
+						sender.sendMessage(ChatColor.GRAY + "consoleWarnings.LostConnection:" + ChatColor.GREEN + "true");
 					} else {
-						sender.sendMessage("consoleWarnings.LostConnection: false");
+						sender.sendMessage(ChatColor.GRAY + "consoleWarnings.LostConnection:" + ChatColor.RED + " false");
 					}
 					
 				}
 				if(con.isSet("consoleWarnings.GenericReason")) {
 					if(con.isBoolean("consoleWarnings.GenericReason")) {
-						sender.sendMessage("consoleWarnings.GenericReason: true");
+						sender.sendMessage(ChatColor.GRAY + "consoleWarnings.GenericReason:" +ChatColor.GREEN + " true");
 					} else {
-						sender.sendMessage("consoleWarnings.GenericReason: false");
+						sender.sendMessage(ChatColor.GRAY + "consoleWarnings.GenericReason:" + ChatColor.RED + " false");
 					}
 					
 				}
 				if(con.isSet("consoleWarnings.TimeOut")) {
 					if(con.isBoolean("consoleWarnings.TimeOut")) {
-						sender.sendMessage("consoleWarnings.TimeOut: true");
+						sender.sendMessage(ChatColor.GRAY + "consoleWarnings.TimeOut:" + ChatColor.GREEN + "true");
 					} else {
-						sender.sendMessage("consoleWarnings.TimeOut: false");
+						sender.sendMessage(ChatColor.GRAY + "consoleWarnings.TimeOut:" + ChatColor.RED + "false");
 					}
 					
 				}
 				if(con.isSet("consoleWarnings.disconnectQuiting")) {
 					if(con.isBoolean("consoleWarnings.disconnectQuiting")) {
-						sender.sendMessage("consoleWarnings.disconnectQuiting: true");
+						sender.sendMessage(ChatColor.GRAY + "consoleWarnings.disconnectQuiting:" + ChatColor.GREEN + "true");
 					} else {
-						sender.sendMessage("consoleWarnings.disconnectQuiting: false");
+						sender.sendMessage(ChatColor.GRAY + "consoleWarnings.disconnectQuiting:" + ChatColor.RED + "false");
 					}
 					
 				}
