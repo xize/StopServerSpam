@@ -1,9 +1,13 @@
 package xize.stopServerSpam.commands;
 
+import java.io.File;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 
 import xize.stopServerSpam.StopServerSpam;
 import xize.stopServerSpam.configuration.config;
@@ -66,7 +70,7 @@ public class command implements CommandExecutor {
 							perm.getPermissionError(sender, cmd, args);
 						}
 					} else if(args[0].equalsIgnoreCase("help")) {
-						if(sender.hasPermission("help")) {
+						if(sender.hasPermission("stopserverspam.command")) {
 							sendHelp(sender);
 						} else {
 							permission perm = new permission(plugin);
@@ -74,7 +78,79 @@ public class command implements CommandExecutor {
 						}
 					}
 				} else if(args.length == 2) {
-					
+					if(args[0].equalsIgnoreCase("config")) {
+						if(args[1].equalsIgnoreCase("disable") || args[1].equalsIgnoreCase("enable")) {
+							if(sender.hasPermission("stopserverspam.command.config.changeable")) {
+								sender.sendMessage("warning you need atleast one more argument in dot syntax!\nuse \"/" + cmd.getName() + " config\" to see in the list");
+							} else {
+								permission perm = new permission(plugin);
+								perm.getPermissionError(sender, cmd, args);
+							}
+						}
+					}
+				} else if(args.length == 3) {
+					config cfg = new config(plugin);
+					if(args[0].equalsIgnoreCase("config")) {
+						if(args[1].equalsIgnoreCase("enable")) {
+							if(sender.hasPermission("stopserverspam.command.config.changeable")) {
+								if(args[2].equalsIgnoreCase("disable-plugin")) {
+									sender.sendMessage(ChatColor.RED + "warning use \"/stopserverspam config\" instead!");
+									return false;
+								}
+								try {
+									File f = new File(plugin.getDataFolder() + File.separator + "config.yml");
+									if(f.exists()) {
+										FileConfiguration con = YamlConfiguration.loadConfiguration(f);
+										if(con.isSet(args[2])) {
+											con.set(args[2], true);
+											con.save(f);
+											sender.sendMessage(ChatColor.GOLD + "[StopServerSpam]" + ChatColor.GRAY + " has saved your config changes!");
+											cfg.reload();
+										} else {
+											sender.sendMessage(ChatColor.RED + "warning this is a invalid config path, please make sure you typed the correct dot syntax");
+										}
+									} else {
+										sender.sendMessage(ChatColor.RED + "a error has been occuried, please reload the server or check if the plugin has write access");
+										return false;
+									}
+								} catch(Exception e) {
+									e.printStackTrace();
+								}
+							} else {
+								permission perm = new permission(plugin);
+								perm.getPermissionError(sender, cmd, args);
+							}
+						} else if(args[1].equalsIgnoreCase("disable")) {
+							if(sender.hasPermission("stopserverspam.command.config.changeable")) {
+								if(args[2].equalsIgnoreCase("disable-plugin")) {
+									sender.sendMessage(ChatColor.RED + "warning use \"/stopserverspam config\" instead!");
+									return false;
+								}
+								try {
+									File f = new File(plugin.getDataFolder() + File.separator + "config.yml");
+									if(f.exists()) {
+										FileConfiguration con = YamlConfiguration.loadConfiguration(f);
+										if(con.isSet(args[2])) {
+											con.set(args[2], false);
+											con.save(f);
+											sender.sendMessage(ChatColor.GOLD + "[StopServerSpam]" + ChatColor.GRAY + " has saved your config changes!");
+											cfg.reload();
+										} else {
+											sender.sendMessage(ChatColor.RED + "warning this is a invalid config path, please make sure you typed the correct dot syntax");
+										}
+									} else {
+										sender.sendMessage(ChatColor.RED + "a error has been occuried, please reload the server or check if the plugin has write access");
+										return false;
+									}
+								} catch(Exception e) {
+									e.printStackTrace();
+								}
+							} else {
+								permission perm = new permission(plugin);
+								perm.getPermissionError(sender, cmd, args);
+							}
+						}
+					}
 				}
 			} else {
 				permission perm = new permission(plugin);

@@ -28,6 +28,14 @@ public class permission {
 				} else if(args[0].equalsIgnoreCase("help")) {
 					sender.sendMessage(ChatColor.RED + "you don't have permission for /" + cmd.getName() + args[0] + "\n" + ChatColor.GRAY + "permission: stopserverspam.command");
 				}
+			} else if(args.length == 2) {
+				if(args[0].equalsIgnoreCase("config")) {
+					if(args[1].equalsIgnoreCase("enable") || args[1].equalsIgnoreCase("disable")) {
+						sender.sendMessage(ChatColor.RED + "you don't have permission for /" + cmd.getName() + args[0] + args[1] + "\n" + ChatColor.GRAY + "permission: stopserverspam.command.config.changeable");
+					}
+				}
+			} else if(args.length == 3) {
+				
 			}
 		}
 	}
