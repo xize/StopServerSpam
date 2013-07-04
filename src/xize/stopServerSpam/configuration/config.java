@@ -78,7 +78,7 @@ public class config {
 			if(f.exists()) {
 				FileConfiguration con = YamlConfiguration.loadConfiguration(f);
 				if(con.isSet("disable-plugin")) {
-					if(!con.isBoolean("disable-plugin")) {
+					if(!con.getBoolean("disable-plugin")) {
 						sender.sendMessage(ChatColor.GRAY + "disable-plugin:" + ChatColor.GREEN + "false (plugin filtering is enabled)");
 					} else {
 						sender.sendMessage(ChatColor.GRAY + "disable-plugin:" + ChatColor.RED + "true (plugin does nothing)");
@@ -86,7 +86,7 @@ public class config {
 
 				}
 				if(con.isSet("consoleWarnings.EndOfStream")) {
-					if(con.isBoolean("consoleWarnings.EndOfStream")) {
+					if(con.getBoolean("consoleWarnings.EndOfStream")) {
 						sender.sendMessage(ChatColor.GRAY + "consoleWarnings.EndOfStream:" + ChatColor.GREEN + "true");
 					} else {
 						sender.sendMessage(ChatColor.GRAY + "consoleWarnings.EndOfStream:" + ChatColor.RED + "false");
@@ -94,7 +94,7 @@ public class config {
 
 				}
 				if(con.isSet("consoleWarnings.LostConnection")) {
-					if(con.isBoolean("consoleWarnings.LostConnection")) {
+					if(con.getBoolean("consoleWarnings.LostConnection")) {
 						sender.sendMessage(ChatColor.GRAY + "consoleWarnings.LostConnection:" + ChatColor.GREEN + "true");
 					} else {
 						sender.sendMessage(ChatColor.GRAY + "consoleWarnings.LostConnection:" + ChatColor.RED + " false");
@@ -102,7 +102,7 @@ public class config {
 
 				}
 				if(con.isSet("consoleWarnings.GenericReason")) {
-					if(con.isBoolean("consoleWarnings.GenericReason")) {
+					if(con.getBoolean("consoleWarnings.GenericReason")) {
 						sender.sendMessage(ChatColor.GRAY + "consoleWarnings.GenericReason:" +ChatColor.GREEN + " true");
 					} else {
 						sender.sendMessage(ChatColor.GRAY + "consoleWarnings.GenericReason:" + ChatColor.RED + " false");
@@ -110,7 +110,7 @@ public class config {
 
 				}
 				if(con.isSet("consoleWarnings.TimeOut")) {
-					if(con.isBoolean("consoleWarnings.TimeOut")) {
+					if(con.getBoolean("consoleWarnings.TimeOut")) {
 						sender.sendMessage(ChatColor.GRAY + "consoleWarnings.TimeOut:" + ChatColor.GREEN + "true");
 					} else {
 						sender.sendMessage(ChatColor.GRAY + "consoleWarnings.TimeOut:" + ChatColor.RED + "false");
@@ -118,7 +118,7 @@ public class config {
 
 				}
 				if(con.isSet("consoleWarnings.disconnectQuiting")) {
-					if(con.isBoolean("consoleWarnings.disconnectQuiting")) {
+					if(con.getBoolean("consoleWarnings.disconnectQuiting")) {
 						sender.sendMessage(ChatColor.GRAY + "consoleWarnings.disconnectQuiting:" + ChatColor.GREEN + "true");
 					} else {
 						sender.sendMessage(ChatColor.GRAY + "consoleWarnings.disconnectQuiting:" + ChatColor.RED + "false");
@@ -138,10 +138,10 @@ public class config {
 		try {
 			File f = new File(plugin.getDataFolder() + File.separator + "config.yml");
 			FileConfiguration con = YamlConfiguration.loadConfiguration(f);
-			if(!con.getBoolean("disable-plugin")) {
-				return true;
-			} else {
+			if(con.getBoolean("disable-plugin")) {
 				return false;
+			} else {
+				return true;
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -162,7 +162,7 @@ public class config {
 					e.printStackTrace();
 				}
 			} else {
-
+				return false;
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
